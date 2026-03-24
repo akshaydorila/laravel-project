@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laravel Form</title>
+    <title>Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-secondary">
 
-<h2>Simple Form</h2>
+<div class="container mt-5">
+    <div class="card p-4 shadow">
+        <h2 class="text-center mb-4">Form</h2>
 
-<form method="POST" action="/submit">
-    @csrf
+        <form method="POST" action="/submit">
+            @csrf
 
-    Name: <input type="text" name="name"><br><br>
-    Email: <input type="email" name="email"><br><br>
+            <div class="mb-3">
+                <label>Name</label>
+                <input type="text" name="name" value="{{ old('name') }}" class="form-control">
+                @error('name')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
 
-    <button type="submit">Submit</button>
-</form>
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="text" name="email" value="{{ old('email') }}" class="form-control">
+                @error('email')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
 
-<hr>
+            <div class="mb-3">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control">
+                @error('password')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
 
-@if(isset($data))
-    <h3>Submitted Data:</h3>
-    Name: {{ $data['name'] ?? '' }} <br>
-    Email: {{ $data['email'] ?? '' }}
-@endif
+            <button class="btn btn-success   w-100">Submit</button>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>
